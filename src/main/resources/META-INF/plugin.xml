@@ -1,0 +1,52 @@
+<!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
+<idea-plugin>
+    <id>dev.gaphunter.changecasecompanion</id>
+    <name>Change Case Companion</name>
+    <vendor>Gap Hunter Labs</vendor>
+    <description><![CDATA[
+        <p>Select an identifier (or just place the caret on one -- no
+        selection needed) and instantly convert it between
+        <code>camelCase</code>, <code>PascalCase</code>,
+        <code>snake_case</code>, <code>kebab-case</code>, and
+        <code>CONSTANT_CASE</code>. Understands acronyms correctly
+        (<code>XMLHttpRequest</code> splits into
+        <code>XML</code>/<code>Http</code>/<code>Request</code>, not
+        letter-by-letter) and works starting from any of those styles,
+        not just camelCase.</p>
+        <p>Ports a pattern that's genuinely popular elsewhere (VS
+        Code's various "change case" extensions, millions of combined
+        installs) with no real equivalent anywhere in JetBrains
+        Marketplace -- confirmed by search before building, not
+        assumed.</p>
+        <p>Works on Editor text directly, not PSI -- so it works
+        identically in any file type, not just Java/Kotlin. 100% local
+        -- no network call, no account, no telemetry.</p>
+    ]]></description>
+
+    <depends>com.intellij.modules.platform</depends>
+
+    <actions>
+        <group id="ChangeCaseCompanion.Actions" text="Change Case Companion" popup="true">
+            <action id="ChangeCaseCompanion.ToCamelCase"
+                    class="dev.gaphunter.changecasecompanion.actions.ConvertToCamelCaseAction"
+                    text="Convert to camelCase"/>
+            <action id="ChangeCaseCompanion.ToPascalCase"
+                    class="dev.gaphunter.changecasecompanion.actions.ConvertToPascalCaseAction"
+                    text="Convert to PascalCase"/>
+            <action id="ChangeCaseCompanion.ToSnakeCase"
+                    class="dev.gaphunter.changecasecompanion.actions.ConvertToSnakeCaseAction"
+                    text="Convert to snake_case"/>
+            <action id="ChangeCaseCompanion.ToKebabCase"
+                    class="dev.gaphunter.changecasecompanion.actions.ConvertToKebabCaseAction"
+                    text="Convert to kebab-case"/>
+            <action id="ChangeCaseCompanion.ToConstantCase"
+                    class="dev.gaphunter.changecasecompanion.actions.ConvertToConstantCaseAction"
+                    text="Convert to CONSTANT_CASE"/>
+            <add-to-group group-id="EditorPopupMenu" anchor="last"/>
+        </group>
+    </actions>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <notificationGroup id="Change Case Companion" displayType="BALLOON"/>
+    </extensions>
+</idea-plugin>
