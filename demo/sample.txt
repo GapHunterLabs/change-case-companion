@@ -1,0 +1,17 @@
+Select each identifier below (double-click selects a word, but this
+plugin works on whatever text you select, including snake_case/kebab-
+case which double-click won't grab as one word -- use click+drag or
+Home/Shift+End for those) and try each of the 5 conversions.
+
+camelCaseSourceUserProfileSettings
+PascalCase source:     UserProfileSettings
+snake_case source:     user_profile_settings
+kebab-case source:     user-profile-settings
+CONSTANT_CASE source:  USER_PROFILE_SETTINGS
+
+Edge cases worth trying:
+  http2_server
+  PARSE_XML_DOCUMENT
+  Id
+ A
+alreadySnakeCaseWithNumbers123
