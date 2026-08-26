@@ -11,6 +11,7 @@ import com.intellij.openapi.project.Project
 import dev.gaphunter.changecasecompanion.convert.CaseConverter
 import dev.gaphunter.changecasecompanion.find.SelectionResolver
 import dev.gaphunter.changecasecompanion.model.CaseStyle
+import dev.gaphunter.changecasecompanion.review.ReviewPrompt
 
 /**
  * Shared implementation for all 5 "Convert to &lt;style&gt;" actions --
@@ -21,10 +22,10 @@ import dev.gaphunter.changecasecompanion.model.CaseStyle
  *
  * Deliberately synchronous on the EDT, unlike this catalog's PSI-
  * heavy plugins -- splitting and rejoining a short identifier string
- * is microseconds of work, not the kind of computation CONSTITUTION.md
- * section 6 requires moving off-EDT. Forcing a pooled-thread hop here
- * would add real complexity (and real test-flakiness risk -- see
- * Turbo Log Companion's own lesson the same night) for zero benefit.
+ * is microseconds of work, not the kind of computation that needs
+ * moving off-EDT. Forcing a pooled-thread hop here would add real
+ * complexity (and real test-flakiness risk -- see Turbo Log
+ * Companion's own lesson the same night) for zero benefit.
  */
 abstract class ChangeCaseActionBase(private val targetCase: CaseStyle) : AnAction() {
 
@@ -51,6 +52,8 @@ abstract class ChangeCaseActionBase(private val targetCase: CaseStyle) : AnActio
             editor.document.replaceString(range.startOffset, range.endOffset, converted)
         })
         notify(project, "Converted to ${targetCase.displayName}.")
+        // Real conversion only -- never counted for the "Already X" no-op branch above.
+        ReviewPrompt.recordHit(project)
     }
 
     private fun notify(project: Project, message: String) {
