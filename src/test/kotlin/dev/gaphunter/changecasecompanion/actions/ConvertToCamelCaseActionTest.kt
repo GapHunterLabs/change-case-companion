@@ -8,9 +8,10 @@ import com.intellij.testFramework.fixtures.BasePlatformTestCase
 /**
  * Exercises the REAL `update()`/`actionPerformed()` path through a
  * constructed [com.intellij.openapi.actionSystem.DataContext] --
- * same technique as every other Gap Hunter Labs plugin built the
- * night SDK_GOTCHAS.md §17 was written, specifically to catch a
- * disabled-action bug WITHOUT needing a live `runIde` sandbox. All 5
+ * same technique as every other Gap Hunter Labs plugin built since
+ * the real disabled-action bug this catches was first found (see Bean
+ * Copy Companion), specifically to catch that class of bug WITHOUT
+ * needing a live `runIde` sandbox. All 5
  * concrete actions share [ChangeCaseActionBase]'s logic, so testing
  * one concrete subclass end to end covers the shared code path for
  * all 5 -- [CaseConverterTest] already covers the per-style rendering
