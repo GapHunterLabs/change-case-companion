@@ -11,9 +11,9 @@ Ports a pattern that's genuinely popular elsewhere — VS Code has
 multiple "change case" extensions with millions of combined installs —
 with no real equivalent anywhere in JetBrains Marketplace (confirmed
 by search before building this, not assumed). A deliberate "port a
-proven concept" bet, not a competitor-complaint-driven build — see
-`CONSTITUTION.md` §1 for the documented-exception discipline this
-follows (same treatment as Refactor Simulator/Bean Copy Companion/
+proven concept" bet, not a competitor-complaint-driven build — the
+same documented-exception discipline this follows (same treatment as
+Refactor Simulator/Bean Copy Companion/
 Turbo Log Companion).
 
 ## Why built this way
@@ -31,8 +31,8 @@ Turbo Log Companion).
   platform's eyes. Works identically in any file type.
 - **Deliberately synchronous, no background-thread dispatch.**
   Splitting and rejoining a short identifier string is microseconds of
-  work — not the kind of computation `CONSTITUTION.md` §6 requires
-  moving off the EDT. Forcing a pooled-thread hop here would add real
+  work — not the kind of computation that needs moving off the EDT.
+  Forcing a pooled-thread hop here would add real
   complexity for zero benefit.
 - **100% local** — no network call, no account, no telemetry.
 
